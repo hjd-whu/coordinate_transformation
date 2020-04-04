@@ -964,7 +964,8 @@ void CcoordinatetransformationDlg::OnBnClickedButton3()
 	//开始构建计算程序
 	//构建初始近似值
 	//构建未知数的矩阵
-	MatrixXd X_all(13, 1);
+	MatrixXd X_all(13, 1);//不可以根据去监视查看矩阵的值
+	//Matrix <double,13,1>X_all;//可以根据去监视查看矩阵的值，但是可能有一些意想不到的bug
 	//前三个是平移尺度X，Y，Z
 	X_all(0, 0) = 0;
 	X_all(1, 0) = 0;
@@ -1128,7 +1129,7 @@ void CcoordinatetransformationDlg::OnBnClickedButton3()
 		MatrixXd V_3(39, 1);
 		V_3 = B_all * x_3 + L_all;
 		//赋值单位权中误差
-		sigma_3 = sqrt((V_3.transpose()*V_3)(0, 0) / 24);
+		sigma_3 = sqrt((V_3.transpose()*V_3)(0, 0) / 20);
 		double comp = (x_3.transpose()*x_3)(0,0);
 		if (comp < 0.0000001)
 		{
@@ -1245,7 +1246,7 @@ void CcoordinatetransformationDlg::OnBnClickedButton3()
 	m_result += "\r\n";
 	m_result += "***************条件数与冗余度***************";
 	m_result += "\r\n";
-	m_result += "条件数n为33，冗余度r为24";
+	m_result += "条件数n为33，冗余度r为20";
 	m_result += "\r\n";
 	m_result += "***************单位权中误差***************";
 	m_result += "\r\n";
